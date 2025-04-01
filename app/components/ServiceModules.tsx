@@ -81,7 +81,6 @@ const ServiceModules = ({ onModuleSelect = () => {} }: ServiceModuleProps) => {
 
   const handleModulePress = (moduleId: string, route: string) => {
     onModuleSelect(moduleId);
-    // In a real app, this would navigate to the respective module
     router.push(route);
   };
 
