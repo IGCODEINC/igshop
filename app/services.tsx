@@ -26,6 +26,7 @@ import {
 } from "lucide-react-native";
 import Header from "./components/Header";
 import BottomNavigation from "./components/BottomNavigation";
+import { MaterialIcons } from "@expo/vector-icons";
 
 interface ServiceProvider {
   id: string;
@@ -153,6 +154,11 @@ export default function ServicesScreen() {
       )
     : filteredServices;
 
+  const toggleFavorite = (id: string) => {
+    // Implement the logic to toggle favorite status
+    console.log(`Toggling favorite status for service with id: ${id}`);
+  };
+
   return (
     <View className="flex-1 bg-gray-100">
       <Header
@@ -245,3 +251,26 @@ export default function ServicesScreen() {
                   <View className="flex-row justify-between items-start">
                     <View className="flex-1 mr-2">
                       <Text className="font-bold text-gray-800">{item.name}</Text>
+                      <Text className="text-gray-600 mt-1">{item.category}</Text>
+                      <View className="flex-row items-center mt-1">
+                        <Star size={16} color="#FFD700" />
+                        <Text className="text-gray-500 ml-1">({item.reviewCount})</Text>
+                      </View>
+                    </View>
+                    <Text className="font-bold text-primary-600">{item.price}</Text>
+                  </View>
+                  <View className="flex-row justify-between items-center mt-2">
+                    <Text className="text-gray-500">{item.distance} • {item.availability}</Text>
+                    <TouchableOpacity onPress={() => toggleFavorite(item.id)}>
+                      <MaterialIcons name={item.isFavorite ? 'favorite' : 'favorite-border'} size={24} color={item.isFavorite ? '#FF4545' : '#9CA3AF'} />
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </View>
+            </TouchableOpacity>
+          )}
+        />
+      )}
+    </View>
+  );
+}
